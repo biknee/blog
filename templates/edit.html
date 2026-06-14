@@ -1,0 +1,35 @@
+{{template "header" .}}
+
+<h2 style="margin-bottom: 1.5rem;">编辑文章</h2>
+
+{{if .Error}}
+<div class="error-message">{{.Error}}</div>
+{{end}}
+
+<div class="editor-layout">
+<div class="editor-main">
+
+<form method="POST" action="/post/{{.Post.Slug}}">
+    <div class="form-group">
+        <label class="form-label" for="title">标题</label>
+        <input type="text" id="title" name="title" class="neo-input" value="{{.Post.Title}}" required autofocus>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="tags">标签（逗号分隔）</label>
+        <input type="text" id="tags" name="tags" class="neo-input" value="{{.FormTags}}">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="content">内容（Markdown）</label>
+        <textarea id="content" name="content" class="neo-input neo-textarea" required>{{.Post.Content}}</textarea>
+    </div>
+    <button type="submit" class="neo-btn">保存修改</button>
+    <a href="/post/{{.Post.Slug}}" class="neo-btn" style="background: transparent;">取消</a>
+</form>
+
+</div>
+<aside class="editor-sidebar">
+{{template "md-ref" .}}
+</aside>
+</div>
+
+{{template "footer" .}}

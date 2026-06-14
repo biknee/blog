@@ -1,0 +1,44 @@
+{{template "header" .}}
+
+{{if .Tag}}
+<h2 style="font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 1.5rem;">
+    标签：<span class="tag" style="font-size: 1rem;">{{.Tag}}</span>
+    <a href="/" class="neo-btn neo-btn-sm" style="margin-left: 1rem;">清除</a>
+</h2>
+{{end}}
+
+{{if .Posts}}
+    <div class="post-grid">
+    {{range .Posts}}
+    <article class="neo-card grid-card" onclick="location.href='/post/{{.Slug}}'">
+        <span class="post-card-title">{{.Title}}</span>
+        <div class="post-card-meta">{{.Date}}</div>
+        {{if .Summary}}
+        <p class="post-card-summary">{{.Summary}}</p>
+        {{end}}
+        {{if .Tags}}
+        <div class="tag-list">
+            {{range .Tags}}
+            <a href="/tag/{{.}}" class="tag" onclick="event.stopPropagation()">{{.}}</a>
+            {{end}}
+        </div>
+        {{end}}
+    </article>
+    {{end}}
+    </div>
+
+    {{if .HasMore}}
+    <div class="load-more">
+        <a href="?page={{.NextPage}}" class="neo-btn">加载更多</a>
+    </div>
+    {{end}}
+
+{{else}}
+<div class="empty-state">
+    <h2>还没有文章</h2>
+    <p style="margin-bottom: 1.5rem;">写下你的第一篇博客！</p>
+    <a href="/new" class="neo-btn">+ 新建</a>
+</div>
+{{end}}
+
+{{template "footer" .}}

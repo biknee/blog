@@ -1,0 +1,47 @@
+{{define "md-ref"}}
+<div class="md-ref-panel">
+    <h3 class="md-ref-title">Markdown 语法</h3>
+
+    <div class="md-ref-section">
+        <h4>标题</h4>
+        <pre class="md-ref-code"># 一级标题
+## 二级标题
+### 三级标题</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>文字样式</h4>
+        <pre class="md-ref-code">**粗体**  *斜体*  ~~删除线~~
+`行内代码`</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>链接与图片</h4>
+        <pre class="md-ref-code">[文字](https://...)
+![图片](image.png)</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>列表</h4>
+        <pre class="md-ref-code">- 无序列表项
+1. 有序列表项</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>引用</h4>
+        <pre class="md-ref-code">&gt; 引用文字</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>代码块</h4>
+        <pre class="md-ref-code">```语言
+代码内容
+```</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>分割线</h4>
+        <pre class="md-ref-code">---</pre>
+    </div>
+    <div class="md-ref-section">
+        <h4>表格</h4>
+        <pre class="md-ref-code">| 列A | 列B |
+|-----|-----|
+| 值1 | 值2 |</pre>
+    </div>
+</div>
+{{end}}

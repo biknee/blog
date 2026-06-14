@@ -1,0 +1,28 @@
+{{template "header" .}}
+
+<article>
+    <header class="post-header">
+        <h1 class="post-title">{{.Post.Title}}</h1>
+        <div class="post-card-meta">{{.Post.Date}}</div>
+        {{if .Post.Tags}}
+        <div class="tag-list">
+            {{range .Post.Tags}}
+            <a href="/tag/{{.}}" class="tag">{{.}}</a>
+            {{end}}
+        </div>
+        {{end}}
+    </header>
+
+    <div class="neo-card post-content">
+        {{.Content}}
+    </div>
+
+    <div class="post-actions">
+        <a href="/edit/{{.Post.Slug}}" class="neo-btn">编辑</a>
+        <form method="POST" action="/post/{{.Post.Slug}}/delete" style="display:inline;" onsubmit="return confirm('确定删除这篇文章？')">
+            <button type="submit" class="neo-btn neo-btn-danger">删除</button>
+        </form>
+    </div>
+</article>
+
+{{template "footer" .}}
