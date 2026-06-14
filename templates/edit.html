@@ -2,6 +2,9 @@
 
 <h2 style="margin-bottom: 1.5rem;">编辑文章</h2>
 
+{{if .Saved}}
+<div class="success-message">草稿已暂存。</div>
+{{end}}
 {{if .Error}}
 <div class="error-message">{{.Error}}</div>
 {{end}}
@@ -23,6 +26,7 @@
         <textarea id="content" name="content" class="neo-input neo-textarea" required>{{.Post.Content}}</textarea>
     </div>
     <button type="submit" class="neo-btn">保存修改</button>
+    <button type="submit" class="neo-btn" formaction="/post/{{.Post.Slug}}/save-draft" style="background: transparent;">暂存</button>
     <a href="/post/{{.Post.Slug}}" class="neo-btn" style="background: transparent;">取消</a>
 </form>
 

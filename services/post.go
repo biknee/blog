@@ -136,6 +136,46 @@ func (s *PostService) UpdatePost(slug, title, tagsStr, content string) (*models.
 	return existing, nil
 }
 
+func (s *PostService) SaveDraft(slug, title, tagsStr, content string) (*models.Post, error) {
+	path := filepath.Join(dataDir, slug+".md")
+
+	existing, err := models.ParseFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	if title != "" {
+		existing.Title = title
+	}
+
+	var tags []string
+	for _, t := range strings.Split(tagsStr, ",") {
+		if t = strings.TrimSpace(t); t != "" {
+			tags = append(tags, t)
+		}
+	}
+	if len(tags) > 0 {
+		existing.Tags = tags
+	}
+
+	existing.Content = content
+
+	fm, _ := yaml.Marshal(map[string]interface{}{
+		"title": existing.Title,
+		"date":  existing.Date,
+		"tags":  existing.Tags,
+		"slug":  existing.Slug,
+	})
+
+	fileContent := "---\n" + string(fm) + "---\n\n" + existing.Content
+
+	if err := os.WriteFile(path, []byte(fileContent), 0644); err != nil {
+		return nil, err
+	}
+
+	return existing, nil
+}
+
 func (s *PostService) DeletePost(slug string) error {
 	path := filepath.Join(dataDir, slug+".md")
 	return os.Remove(path)

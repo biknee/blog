@@ -17,6 +17,12 @@
 - 模块完成后写一个最小验证脚本或直接调用确认
 - 测试不通过绝不往下走
 
+**每次对话开始或接到新任务时，必须先查 wiki/ 再动手。**
+- 新增功能 → `wiki/features/inventory.md`
+- 修改路由 → `wiki/architecture/routes.md`
+- 遇到报错 → `wiki/errors/known-errors.md`
+- 代码改动涉及 wiki 覆盖内容 → 同步更新对应文件
+
 ## 技术栈
 
 - **语言**：Go（最新稳定版，当前 1.26.2）
@@ -93,6 +99,7 @@ summary: "可选摘要"
 | POST | `/post` | 创建文章 |
 | GET | `/edit/:slug` | 编辑文章表单 |
 | POST | `/post/:slug` | 更新文章 |
+| POST | `/post/:slug/save-draft` | 暂存草稿 |
 | POST | `/post/:slug/delete` | 删除文章 |
 | GET | `/tag/:tag` | 按标签筛选 |
 

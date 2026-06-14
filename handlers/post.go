@@ -124,10 +124,13 @@ func (h *PostHandler) EditForm(c *gin.Context) {
 		return
 	}
 
+	_, saved := c.GetQuery("saved")
+
 	c.HTML(http.StatusOK, "edit.html", gin.H{
 		"Title":    "编辑：" + post.Title + " — 我的博客",
 		"Post":     post,
 		"FormTags": strings.Join(post.Tags, ", "),
+		"Saved":    saved,
 	})
 }
 
@@ -154,6 +157,21 @@ func (h *PostHandler) Update(c *gin.Context) {
 	}
 
 	c.Redirect(http.StatusFound, "/post/"+post.Slug)
+}
+
+func (h *PostHandler) SaveDraft(c *gin.Context) {
+	slug := c.Param("slug")
+	title := strings.TrimSpace(c.PostForm("title"))
+	tags := strings.TrimSpace(c.PostForm("tags"))
+	content := c.PostForm("content")
+
+	post, err := h.svc.SaveDraft(slug, title, tags, content)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "暂存失败")
+		return
+	}
+
+	c.Redirect(http.StatusFound, "/edit/"+post.Slug+"?saved=1")
 }
 
 func (h *PostHandler) Delete(c *gin.Context) {

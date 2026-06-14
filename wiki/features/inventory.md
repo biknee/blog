@@ -8,6 +8,7 @@
 | 查看文章 | 已实现 | `GET /post/:slug` | Markdown 渲染，代码语法高亮（monokai） |
 | 新建文章 | 已实现 | `GET /new` → `POST /post` | 表单输入标题、标签（逗号分隔）、Markdown 正文 |
 | 编辑文章 | 已实现 | `GET /edit/:slug` → `POST /post/:slug` | 加载已有内容到表单，保存覆盖 |
+| 暂存草稿 | 已实现 | `POST /post/:slug/save-draft` | 编辑页暂存当前内容，不校验必填，留在编辑页 |
 | 删除文章 | 已实现 | `POST /post/:slug/delete` | 直接删除 .md 文件，重定向到首页 |
 | 按标签筛选 | 已实现 | `GET /tag/:tag` | 大小写不敏感匹配 |
 | 自动生成 slug | 已实现 | 模型层 | 标题→小写+连字符，冲突时追加时间戳后缀 |

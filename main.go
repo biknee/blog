@@ -29,6 +29,7 @@ func main() {
 	r.POST("/post", h.Create)
 	r.GET("/edit/:slug", h.EditForm)
 	r.POST("/post/:slug", h.Update)
+	r.POST("/post/:slug/save-draft", h.SaveDraft)
 	r.POST("/post/:slug/delete", h.Delete)
 	r.GET("/tag/:tag", h.Tag)
 
